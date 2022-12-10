@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import getAlbums from "../actions/musicLibrary";
+import AlbumTile from "./AlbumTile";
 
 async function loadAlbums(setAlbums, setLoading) {
   setLoading(true);
@@ -18,8 +19,9 @@ export default function MusicLibrary() {
   }, []);
 
   return (<div>
-
-    {albums.map(album => album["im:name"]["label"])}
-
+    {loading && "Loading..."}
+    {
+      albums.map(album => <AlbumTile album={album} />)
+    }
   </div>);
 }
