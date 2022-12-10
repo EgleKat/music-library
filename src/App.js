@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="App">
       <h1>
-        Music Library
+        Legalesign Music Library
       </h1>
       <MusicLibrary />
     </div>

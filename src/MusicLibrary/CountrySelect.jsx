@@ -8,9 +8,16 @@ export default function CountrySelect({ selectCountry }) {
     value: code,
   }));
 
+  const selectId = "country-select";
   return (
-    <div>
-      <Select options={options} isSearchable onChange={selectCountry} />
+    <div className="country-select selector">
+      <label htmlFor={selectId}>Select country</label>
+      <Select
+        id={selectId}
+        options={options}
+        isSearchable
+        onChange={selectCountry}
+      />
     </div>
   );
 }

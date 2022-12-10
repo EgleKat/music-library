@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 
-export default function MusicSearch({ searchAlbums }) {
+export default function AlbumSearch({ searchAlbums }) {
   const searchInput = useRef(null);
   const [searchVal, setSearchVal] = useState("");
 
@@ -11,8 +11,8 @@ export default function MusicSearch({ searchAlbums }) {
 
   const labelId = "album-search";
   return (
-    <>
-      <label htmlFor={labelId}>Search albums </label>
+    <div className="album-search selector">
+      <label htmlFor={labelId}>Search albums</label>
       <input
         onChange={handleChange}
         ref={searchInput}
@@ -21,6 +21,6 @@ export default function MusicSearch({ searchAlbums }) {
         type="input"
         placeholder="Christmas..."
       />
-    </>
+    </div>
   );
 }

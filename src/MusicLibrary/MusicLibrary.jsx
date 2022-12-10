@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import getAlbums from "../actions/musicLibrary";
 import getAlbumName from "./albums";
 import AlbumTile from "./AlbumTile";
-import MusicSearch from "./MusicSearch";
+import AlbumSearch from "./AlbumSearch";
 import CountrySelect from "./CountrySelect";
 import Loading from "../Loading";
+import { FilterControls } from "./AlbumStyles";
 async function loadAlbums(setAlbums, setLoading, countryCode = "us") {
   setLoading(true);
   const response = await getAlbums(50, countryCode);
@@ -48,11 +49,13 @@ export default function MusicLibrary() {
   return (
     <div>
       <h2>Top 50 Albums for {country.name}</h2>
-      <MusicSearch searchAlbums={searchAlbums} />
-      <CountrySelect selectCountry={selectCountry} />
+      <FilterControls>
+        <AlbumSearch searchAlbums={searchAlbums} />
+        <CountrySelect selectCountry={selectCountry} />
+      </FilterControls>
       {loading && <Loading />}
       {!!filteredAlbums?.length && (
-        <ol>
+        <ol aria-live="polite">
           {filteredAlbums.map((album, idx) => (
             <AlbumTile key={idx} album={album} />
           ))}
