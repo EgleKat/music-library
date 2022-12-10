@@ -1,11 +1,15 @@
 import React, { useState, useRef } from 'react'
 
-export default function MusicSearch() {
+export default function MusicSearch({ searchAlbums }) {
 
   const searchInput = useRef(null);
   const [searchVal, setSearchVal] = useState("");
 
+  function handleChange(event) {
+    setSearchVal(event?.target?.value || "")
+    searchAlbums(event?.target?.value);
+  }
   return (
-    <input onChange={event => setSearchVal(event?.target?.value || "")} ref={searchInput} value={searchVal} />
+    <input onChange={handleChange} ref={searchInput} value={searchVal} />
   )
 }
