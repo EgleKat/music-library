@@ -4,7 +4,7 @@ import getAlbumName from "./albums";
 import AlbumTile from "./AlbumTile";
 import MusicSearch from "./MusicSearch";
 import CountrySelect from "./CountrySelect";
-import getCountryByCode from "../helpers";
+import Loading from "../Loading";
 async function loadAlbums(setAlbums, setLoading, countryCode = "us") {
   setLoading(true);
   const response = await getAlbums(50, countryCode);
@@ -48,10 +48,10 @@ export default function MusicLibrary() {
   return (
     <div>
       <h2>Top 50 Albums for {country.name}</h2>
-      {loading && "Loading..."}
       <MusicSearch searchAlbums={searchAlbums} />
       <CountrySelect selectCountry={selectCountry} />
-      {filteredAlbums?.length && (
+      {loading && <Loading />}
+      {!!filteredAlbums?.length && (
         <ol>
           {filteredAlbums.map((album, idx) => (
             <AlbumTile key={idx} album={album} />
