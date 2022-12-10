@@ -67,6 +67,7 @@ export const Album = styled.div`
     text-transform: uppercase;
     font-weight: bold;
     letter-spacing: .2px;
+    font-size: 1.1rem;
   }
   .album-artist {
     /* font-weight: bolder; */
