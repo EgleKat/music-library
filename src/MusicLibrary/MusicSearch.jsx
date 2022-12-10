@@ -10,6 +10,9 @@ export default function MusicSearch({ searchAlbums }) {
     searchAlbums(event?.target?.value);
   }
   return (
-    <input onChange={handleChange} ref={searchInput} value={searchVal} />
+    <>
+      <label htmlFor="search">Search albums </label>
+      <input onChange={handleChange} ref={searchInput} value={searchVal} name="search" type="input" placeholder="Christmas..." />
+    </>
   )
 }

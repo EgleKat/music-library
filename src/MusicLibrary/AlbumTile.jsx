@@ -1,8 +1,8 @@
 import React from 'react';
 import getAlbumName from './albums';
 
-export default function AlbumTile({ album }) {
+export default function AlbumTile({ album, place }) {
   return (
-    <div>{getAlbumName(album)}</div>
+    <li>{getAlbumName(album)}</li>
   )
 }
