@@ -3,10 +3,11 @@ import getAlbums from "../actions/musicLibrary";
 import getAlbumName from "./albums";
 import AlbumTile from "./AlbumTile";
 import MusicSearch from "./MusicSearch";
-
-async function loadAlbums(setAlbums, setLoading) {
+import CountrySelect from "./CountrySelect";
+import getCountryByCode from "../helpers";
+async function loadAlbums(setAlbums, setLoading, countryCode = "us") {
   setLoading(true);
-  const response = await getAlbums(50);
+  const response = await getAlbums(50, countryCode);
   console.log(response);
   setAlbums(response.feed.entry);
   setLoading(false);
@@ -15,10 +16,16 @@ export default function MusicLibrary() {
   const [loading, setLoading] = useState(false);
   const [albums, setAlbums] = useState([]);
   const [filteredAlbums, setFilteredAlbums] = useState([]);
+  const [country, setCountry] = useState({
+    name: "United States",
+    countryCode: "US",
+  });
 
   useEffect(() => {
-    loadAlbums(setAlbums, setLoading);
-  }, []);
+    // when new country is selected, reset albums
+    setAlbums([]);
+    loadAlbums(setAlbums, setLoading, country.code);
+  }, [country]);
 
   useEffect(() => {
     // reset search if new album list is loaded
@@ -34,11 +41,16 @@ export default function MusicLibrary() {
     setFilteredAlbums(albumsToDisplay);
   };
 
+  const selectCountry = ({ label: countryName, value: countryCode }) => {
+    setCountry({ name: countryName, code: countryCode });
+  };
+
   return (
     <div>
+      <h2>Top 50 Albums for {country.name}</h2>
       {loading && "Loading..."}
       <MusicSearch searchAlbums={searchAlbums} />
-
+      <CountrySelect selectCountry={selectCountry} />
       {filteredAlbums?.length && (
         <ol>
           {filteredAlbums.map((album, idx) => (
